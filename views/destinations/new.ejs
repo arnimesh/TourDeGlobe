@@ -1,0 +1,57 @@
+<% layout('/layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">New destination</h1>
+        <div class="col-6 offset-3">
+            <form action="/destination" method='POST' novalidate class="needs-validation" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label" for="title" x>Name of tourist place</label>
+                    <input class="form-control" type="text" id="title" placeholder="Enter your name"
+                        name="destination[title]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" placeholder="eg city , state"
+                        name="destination[location]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+       
+                <div class="mb-3">
+                    <label class="form-label" for="travelcost">Travel cost</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="travelcost-label">Rs</span>
+                        <input type="text" class="form-control" id="price" placeholder="0.00(must be a Number)" aria-label="travelcost"
+                            aria-describedby="travelcost-label" name="destination[travelcost]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Description of the place</label>
+                        <textarea class="form-control" type="text" placeholder="share your experience" id="description" name="destination[description]" required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Choose images</label>
+                <div class="input-group ">
+                    <input type="file" class="form-control" id="inputGroupFile02" name="image" multiple>
+                  </div>
+                </div>
+                
+                
+                <div class="mb-3">
+                    <button class="btn btn-success">Add destination</button>
+                </div>
+            </form>
+            <a href="/destination">view all destination</a>
+
+        </div>
+    </div>

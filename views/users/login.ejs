@@ -1,0 +1,45 @@
+<% layout('layouts/boilerplate')%>
+
+
+
+
+<div class="container d-flex justify-content-center align-items-center mt-1">
+    <div class="row">
+        
+       
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4 mb-3">
+            <button type="button  " class="btn btn-outline-dark btn-md mb-4">
+                <a href="/auth/google"> 
+                <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            </a>
+                Login with Google
+            </button>
+            <div class="card shadow">
+                <img src="https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1300&q=60"
+                    alt="" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">Login</h5>
+                    <form action="/login" method="POST" class="needs-validation" novalidate>
+                        <div class="mb-1">
+                            <label class="form-label" for="username">Username</label>
+                            <input class="form-control" type="text" id="username" name="username" autofocus required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control" type="password" id="password" name="password" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <button class="btn btn-success btn-block">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

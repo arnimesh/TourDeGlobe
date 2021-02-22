@@ -1,0 +1,110 @@
+<% layout('/layouts/boilerplate') %>
+<!-- <if(data.length>0){%> 
+<console.log(data)  %> 
+<} %>  -->
+<div class="d-flex justify-content-end col-4 offset-8 ">
+  <form action="/destination" method="GET" class="input-group">
+          <input type="text" class="form-control" type="text" name="search" placeholder="Search Destinations..." aria-label="Search">
+  <button class="btn btn-danger" type="submit">       <i class="fa fa-search"></i>
+  </button>
+
+</form>
+</div>
+
+<h6 style="color: darkgray;">(you may click on map to view destination)</h6>
+
+<div id="map" style="width: 100%; height: 500px ;"></div>
+
+  <!-- <form class="d-flex mb-2">
+    <input class="form-control me-2" id='dsearch' type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+   -->
+   <!-- <nav id="searchNav" class="navbar navbar-expand navbar-light bg-white shadow-sm"> -->
+
+   
+
+    <div class="text-center badge bg-danger mt-4 mb-5 col-4 offset-4">
+      <% if(count>1) {%>
+        <h3 ><%=count  %> Destinations Found</h3>
+      <% } else{ %>
+        <h3 >All Destinations</h3>
+      <% } %> 
+    </div>
+  <!-- </nav> -->
+
+  <div class="row " >
+
+  <%for(let name of place){%>
+        <div class="col-md-4" >
+          <div class='card mb-4' >
+          <%if(name.images.length) {%>
+            <img class="img-fluid" alt="" src="<%=name.images[0].url%>">
+            <% }else {%>
+            <img class="img-fluid" alt=""
+                src="https://res.cloudinary.com/ducqvbmtm/image/upload/v1612987195/TourDeGlobe/bvruejlbcj2krijodoiw.jpg">
+            <% } %>
+        
+          <div class="card-body">
+            <h5 class="card-title" >
+              <%=name.title %>
+            </h5>
+            <p class="card-text">
+              <% if(name.description.length>100) {%>  
+              <%=name.description.substring(0,99) %>.................  <a href="/destination/<%=name._id%>">(read more)</a>
+            <% } else{%> 
+              <%=name.description %> 
+              <% } %> 
+            
+            </p>
+            <p class="card-text">
+              <small class="text-muted">
+                <%=name.location %>
+              </small>
+            </p>
+
+            <!-- <i class="fa fa-star" aria-hidden="true"></i> -->
+            <!-- <li>Submitted by <=name.author.username%>
+            </li> -->
+            <a class="btn btn-primary" href="/destination/<%=name._id%> ">view <%=name.title  %> </a>
+            <hr>
+           
+              <!-- <console.log(name.reviews[0]) %>  ; -->
+                
+<h6 class="card-subtitle">
+  <% if(name.reviews.length === 0) { %>
+    <span class="text-muted">No Reviews</span>
+  <% } else { %>
+    <% var stars = [ '<i class="fa fa-star " aria-hidden="true"></i>', '<i class="fa fa-star " aria-hidden="true"></i>', '<i class="fa fa-star " aria-hidden="true"></i>'] %>
+    <!-- <for(let i=0;i<name.reviews.rating) %>  -->
+    <% for(var i = 0; i < Math.round(name.reviews.rating); i++) { %>
+        <% stars[i] = '<i class="fa fa-star bg-danger "></i>' %>
+    <% } %>
+    
+    <% for(var i = 0; i < stars.length; i++) { %>
+      <%-stars[i] %>
+    <% } %>
+    <% if (name.reviews.length === 1) { %>
+      <span class="text-muted"><%= name.reviews.length %> Review</span>
+    <% } else { %>
+      <span class="text-muted"><%= name.reviews.length %> Reviews</span>
+    <% } %>
+  <% } %>
+</h6>
+
+
+          </div>
+        </div>
+      </div>
+
+    <% }%>
+  </div>
+
+  
+    <script>
+      const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+      const place = { features: <%- JSON.stringify(place) %>}
+  </script>
+  
+  <script src="/javascripts/clusterMap.js"></script>
+ 

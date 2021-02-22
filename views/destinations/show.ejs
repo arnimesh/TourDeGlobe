@@ -1,0 +1,174 @@
+<% layout('/layouts/boilerplate') %>
+  <link rel="stylesheet" href="/stylesheets/stars.css">
+
+
+  <div class="row" >
+    <div class="col-6">
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <% place.images.forEach((img, i) => {  %>
+    <div class="carousel-item <%= i === 0 ? 'active' : ''%> ">
+      <img src="<%=img.url %> " class="d-block w-100" alt="...">
+    </div>
+      <% }) %>
+    
+  </div>
+  <% if(place.images.length >1) {%>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+  <% }%>
+
+</div>
+
+    <div class="card mb-3">
+
+      <div class="card-body">
+        <h5 class="card-title">
+         <strong>Name: </strong> <%=place.title %>
+        </h5>
+
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <strong>Location: </strong><%=place.location %>
+        </li>
+        <li class="list-group-item">
+          <strong>Travel Cost: </strong>Rs <%= place.travelcost%>/night
+        </li>
+       
+
+        <li class="list-group-item">
+        <strong>Description:</strong>
+        <p class="card-text"> 
+          <%= place.description%>
+        </p>
+      </li>
+      </ul>
+      <% if( currentUser && place.author.equals(currentUser._id)) {%>
+        <div class="card-body">
+          <a href="/destination/<%=place._id%>/edit" class="card-link btn btn-info">Edit</a>
+          <form class="d-inline card link " action="/destination/<%=place._id %>?_method=DELETE " method="POST">
+            <button class="btn btn-danger">delete</button>
+          </form>
+        </div>
+        <% } %>
+          <div class="card-footer text-muted">
+          Submitted by <%= place.author.username%> ,
+            <% 
+            var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+var today = mm + '/' + dd + '/' + yyyy;
+             %> 
+             <%=today %> 
+        </div>
+        
+    </div>
+    <a href="/destination"  class="btn btn-outline-secondary col-4"> Back to destination</a>
+
+    </div>
+  <div class="col-6">
+    <div id='map' style='width: 100%; height: 500px;'>
+    </div>
+  </div>
+    </div>
+ 
+    
+  <div class="row ">
+    <div class="col-12">
+    <% if(currentUser){ %>
+      <p>
+        <% if( place.reviews.length<1){ %>
+          <h6>No reviews yet(Be the first to review)</h6>
+        
+         <% } %> 
+      </p>
+      <% } %>
+         <h5>Leave a review</h5>
+       
+      <form action="/destination/<%=place._id%>/reviews" method="POST" class="mb-3 needs-validation " novalidate>
+        <div >
+          <fieldset class="starability-basic">
+            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
+              aria-label="No rating." />
+            <input type="radio" id="first-rate1"  name="review[rating]" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+        </div>
+         <div class="mb-3">
+          <label class="form-label" for="body">Review Text
+
+          </label>
+          <textarea class="form-control" name="review[body]" id="body"  required></textarea>
+        </div>
+        <button class="btn btn-success">Submit</button>
+      </form>
+    
+      
+<div class="mb-3">
+  <% for(let review of place.reviews) {%>
+    <div class="card ">
+      <div class="card-body">
+        <div >
+          <h6 class="card-title">
+            <%= review.author.username%>
+          </h6>
+          <div class="starability-result" data-rating="<%=review.rating%>">
+          </div>
+          <!-- <h6 class="card-subtitle mb-2 text-muted">By <review.author.username%> -->
+          </h6>
+          <p class='card-title'>
+             <%= review.body %>
+          </p>
+          <div>
+            <hr><% 
+            var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+var today = mm + '/' + dd + '/' + yyyy;
+             %> 
+             <%=today %> 
+       
+           <% if( currentUser && review.author.equals(currentUser._id)) {%>
+            <form class="d-inline card link "
+              action="/destination/<%=place._id %>/reviews/<%=review._id  %>?_method=DELETE " method="POST">
+              <button class="btn btn-sm btn-danger">delete</button>
+            </form>
+            <% } %>
+        </div>
+      </div>
+    </div>
+
+    <% } %>
+</div>
+        
+  </div>
+</div>
+</div>
+
+  
+  
+<script>
+  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+  const place =<%-JSON.stringify(place)%>
+</script>
+
+  <script src="/javascripts/showMap.js"></script>
