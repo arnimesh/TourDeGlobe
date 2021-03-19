@@ -126,9 +126,9 @@ var today = mm + '/' + dd + '/' + yyyy;
     <div class="card ">
       <div class="card-body">
         <div >
-          <h6 class="card-title">
-            <%= review.author.username%>
-          </h6>
+          <!-- <h6 class="card-title">
+            <review.author.username%>
+          </h6> -->
           <div class="starability-result" data-rating="<%=review.rating%>">
           </div>
           <!-- <h6 class="card-subtitle mb-2 text-muted">By <review.author.username%> -->
@@ -137,7 +137,19 @@ var today = mm + '/' + dd + '/' + yyyy;
              <%= review.body %>
           </p>
           <div>
-            <hr><% 
+            <div class="card-footer text-muted">
+               <%= review.author.username%> ,
+                <% 
+                var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    
+    var today = mm + '/' + dd + '/' + yyyy;
+                 %> 
+                 <%=today %> 
+            </div>
+            <!-- <hr><
             var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -145,8 +157,8 @@ var yyyy = today.getFullYear();
 
 var today = mm + '/' + dd + '/' + yyyy;
              %> 
-             <%=today %> 
-       
+             <=today %> 
+        -->
            <% if( currentUser && review.author.equals(currentUser._id)) {%>
             <form class="d-inline card link "
               action="/destination/<%=place._id %>/reviews/<%=review._id  %>?_method=DELETE " method="POST">
