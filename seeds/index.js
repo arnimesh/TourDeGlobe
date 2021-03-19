@@ -6,7 +6,7 @@ const {places,descriptors}=require('./seedhelpers');
 if (process.env.NODE_ENV !== "production") {
   require('dotenv').config();
 }
-const dbUrl=process.env.dbUrl||'mongodb://localhost:27017/tour49';
+const dbUrl=process.env.dbUrl||'mongodb://localhost:27017/tourdeglobe';
 
 // 'mongodb://localhost:27017/tour49'
 mongoose.connect(dbUrl, { useNewUrlParser: true,useCreateIndex: true, useUnifiedTopology: true })
@@ -30,7 +30,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true,useCreateIndex: true, useUnified
         const price=Math.floor(Math.random() * 50000)+100;
 
             const place= new destination({
-                author:'60215ad3495d113f3829e261',
+               author:'6054e629ec80d42ad80e7947',
                  location:`${cities[randomnum].city},${cities[randomnum].state}`,
                  title: `${sample(descriptors)} ${sample(places)}`,
                  description:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
@@ -42,15 +42,15 @@ mongoose.connect(dbUrl, { useNewUrlParser: true,useCreateIndex: true, useUnified
                     cities[randomnum].latitude,]
               },
                  images: [
+                    // {
+                    // url: 'https://res.cloudinary.com/ducqvbmtm/image/upload/v1612983653/TourDeGlobe/b0ua3vefizxqdzhfuqlz.jpg ',
+                    //   filename: 'TourDeGlobe/s5ihpo28jucvl3twiqip'
+                    // },
                     {
                       
-                      url: 'https://res.cloudinary.com/ducqvbmtm/image/upload/v1612987195/TourDeGlobe/s5ihpo28jucvl3twiqip.jpg',
-                      filename: 'TourDeGlobe/s5ihpo28jucvl3twiqip'
-                    },
-                    {
-                      
-                      url: 'https://res.cloudinary.com/ducqvbmtm/image/upload/v1612987195/TourDeGlobe/bvruejlbcj2krijodoiw.jpg',
-                      filename: 'TourDeGlobe/bvruejlbcj2krijodoiw'
+                    // //  url: 'https://res.cloudinary.com/ducqvbmtm/image/upload/v1612987195/TourDeGlobe/bvruejlbcj2krijodoiw.jpg',
+                    url: 'https://res.cloudinary.com/ducqvbmtm/image/upload/v1616177190/TourDeGlobe/poywmfskcckbuwzz4i5y.jpg',
+                    filename: ' TourDeGlobe/poywmfskcckbuwzz4i5y '
                     }
                   ]
 
