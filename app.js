@@ -24,7 +24,7 @@ const Destination=require('./models/destination');
 
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
-const dbUrl='mongodb://localhost:27017/tour49';
+const dbUrl='mongodb://localhost:27017/tourdeglobe';
 
 const MongoDBStore = require("connect-mongo")(session);
 var moment = require('moment'); // require
@@ -115,52 +115,54 @@ app.use((req, res, next) => {
     next();
 })
 
-passport.use(
-    new GoogleStrategy({
-        clientID: keys.google.clientID,
-        clientSecret: keys.google.clientSecret,
-        callbackURL: "/callback"
-        
+// passport.use(
+//     new GoogleStrategy({
+//         clientID: keys.google.clientID,
+//         clientSecret: keys.google.clientSecret,
+//         callbackURL: "/callback",
+       
+
   
-    }, (accessToken, refreshToken, profile, done) => {
-        // passport callback function
-        //check if user already exists in our db with the given profile ID
-        User.findOne({googleId: profile.id}).then((currentUser)=>{
-          if(currentUser){
-            //if we already have a record with the given profile ID
-            done(null, currentUser);
-          } else{
-               //if not, create a new user 
-              new User({
-                googleId: profile.id,
-              name: profile.Name,
-              // created: Date.now()
+//     }, (accessToken, refreshToken, profile, done) => {
+//         console.log(profile);
+//         // passport callback function
+//         //check if user already exists in our db with the given profile ID
+//         User.findOne({googleId: profile.id}).then((currentUser)=>{
+//           if(currentUser){
+//             //if we already have a record with the given profile ID
+//             done(null, currentUser);
+//           } else{
+//                //if not, create a new user 
+//               new User({
+//               googleId: profile.id,
               
                 
-              }).save().then((newUser) =>{
-                done(null, newUser);
-              });
-           } 
-        })
-      })
-  );
-app.get("/auth/google",passport.authenticate("google", {
-   scope: ['https://www.googleapis.com/auth/plus.login'] ,
+//               }).save().then((newUser) =>{
+//                 done(null, newUser);
+//               });
+//            } 
+//         })
+//       })
+//   );
+// app.get("/auth/google",passport.authenticate("google", {
+//    //scope: ['https://www.googleapis.com/auth/plus.login'] ,
 
-    //scope: ["profile", "email"],
-  }));
-  app.get('/callback', 
-  passport.authenticate('google', { failureRedirect: '/destination/login' }),
-  function(req, res) {
-      console.log(req.user);
-      console.log("sfs");
-    res.redirect('/destination');
-  });
-//   app.get("/auth/google/redirect",passport.authenticate('google'));
-//   app.get("/auth/google/redirect",passport.authenticate("google"),(req,res)=>{
-//       res.send(req.user);
-//     console.log(req.user.googleId);
+//     scope: ["profile", "email"],
+//   }));
+//   app.get('/callback', 
+//   passport.authenticate('google', { failureRedirect: '/destination/login' }),
+//   function(req, res) {
+//       console.log(req.user);
+//       //console.log(profile);
+    
+//     //   console.log(req.user.emails[0].value);
+//     //   console.log(req.user.photos[0].value);
+      
+
+      
+//     res.redirect('/destination');
 //   });
+
 
 
 passport.deserializeUser((obj, done) => {
