@@ -6,10 +6,11 @@ const UserSchema = new Schema({
     email: {
         type: String,
         //required: true,
-        unique: true
+       // unique: true
     },
     googleId:String,
-    name:String
+    
+  
 });
 
 UserSchema.plugin(passportLocalMongoose);
