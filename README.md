@@ -1,7 +1,7 @@
 # TourDeGlobe
-A website to help people especially for the hodophiles who love to travel to find their next destination stop by providing them with all required information. This site can be used to promote the tourist places which may be located at remote places and is not known to the world.people here share their journey experiences along with uploading their photos and one can give ratings and users can search,sort which place to visit according to the number of likes of people.
+A website to help people especially for the hodophiles who love to travel to find their next destination stop by providing them with all required information. This site can be used to promote the tourist places which may be located at remote places and is not known to the world.people here share their journey experiences along with uploading their photos and one can give ratings and give their reviews and users can search,sort which place to visit according to the number of likes of people.Users will get to know approx travel cost.
 
-A responsive map provided for users to have let them which helps them have a quick idea about the areas that are most visited around the world.
+A responsive map provided for users  which helps them have a quick idea about the areas that are most visited around the world.
 
 HOMEPAGE
 ![Screenshot (334)](https://user-images.githubusercontent.com/50800688/111838220-06711d80-891f-11eb-81d1-a3da6b5f7e66.png)
